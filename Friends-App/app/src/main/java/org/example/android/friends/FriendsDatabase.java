@@ -6,8 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 /**
- * Created by dev on 2/5/15.
- * Updated to API 22 on 5/6/15
+ * Created by Adheesh on 6/5/15.
  */
 public class FriendsDatabase extends SQLiteOpenHelper {
     private static final String TAG = FriendsDatabase.class.getSimpleName();

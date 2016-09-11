@@ -4,8 +4,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
- * Created by dev on 2/5/15.
- * Updated to API 22 on 5/6/15
+ * Created by Adheesh on 6/5/15.
  */
 public class FriendsContract {
     interface FriendsColumns {

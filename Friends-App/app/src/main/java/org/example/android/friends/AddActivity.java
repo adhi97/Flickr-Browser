@@ -13,8 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Created by dev on 3/1/15.
- * Updated to API 22 on 5/6/15
+ * Created by Adheesh on 7/7/16.
  */
 public class AddActivity extends FragmentActivity {
 

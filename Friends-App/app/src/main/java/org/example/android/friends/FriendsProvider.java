@@ -12,8 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 /**
- * Created by dev on 2/5/15.
- * Updated to API 22 on 5/6/15
+ * Created by Adheesh on 6/5/15.
  */
 public class FriendsProvider extends ContentProvider {
     private FriendsDatabase mOpenHelper;

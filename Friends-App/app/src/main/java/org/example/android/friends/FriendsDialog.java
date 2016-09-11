@@ -16,8 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Created by dev on 2/26/15.
- * Updated to API 22 on 5/6/15
+ * Created by Adheesh on 6/22/15.
  */
 public class FriendsDialog extends DialogFragment {
     private static final String LOG_TAG = FriendsDialog.class.getSimpleName();

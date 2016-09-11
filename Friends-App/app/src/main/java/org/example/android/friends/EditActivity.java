@@ -14,8 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * Created by dev on 3/1/15.
- * Updated to API 22 on 5/6/15
+ * Created by Adheesh on 7/7/16.
  */
 public class EditActivity extends FragmentActivity {
     private final String LOG_TAG = EditActivity.class.getSimpleName();

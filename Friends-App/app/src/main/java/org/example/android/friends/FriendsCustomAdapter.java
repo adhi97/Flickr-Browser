@@ -14,8 +14,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by dev on 2/26/15.
- * Updated to API 22 on 5/6/15
+ * Created by Adheesh on 6/5/15.
  */
 public class FriendsCustomAdapter extends ArrayAdapter<Friend> {
     private LayoutInflater mLayoutInflater;

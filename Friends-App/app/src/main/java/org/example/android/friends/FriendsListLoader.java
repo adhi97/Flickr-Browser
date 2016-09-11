@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by dev on 2/26/15.
- * Updated to API 22 on 5/6/15
+ * Created by Adheesh on 6/5/15.
  */
 public class FriendsListLoader extends AsyncTaskLoader<List<Friend>> {
     private static final String LOG_TAG = FriendsListLoader.class.getSimpleName();

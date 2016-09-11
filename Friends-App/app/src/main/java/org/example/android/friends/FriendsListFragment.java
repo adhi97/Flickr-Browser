@@ -9,8 +9,7 @@ import android.support.v4.content.Loader;
 import java.util.List;
 
 /**
- * Created by dev on 2/26/15.
- * Updated to API 22 on 5/6/15
+ * Created by Adheesh on 6/17/15.
  */
 public class FriendsListFragment extends ListFragment
      implements LoaderManager.LoaderCallbacks<List<Friend>> {

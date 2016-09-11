@@ -1,8 +1,7 @@
 package org.example.android.friends;
 
 /**
- * Created by dev on 2/26/15.
- * Updated to API 22 on 5/6/15
+ * Created by Adheesh on 6/26/16.
  */
 public class Friend {
     private int _id;

@@ -13,8 +13,7 @@ import android.widget.ListView;
 import java.util.List;
 
 /**
- * Created by dev on 3/1/15.
- * Updated to API 22 on 5/6/15
+ * Created by Adheesh on 6/5/15.
  */
 public class SearchActivity extends FragmentActivity
     implements LoaderManager.LoaderCallbacks<List<Friend>> {
