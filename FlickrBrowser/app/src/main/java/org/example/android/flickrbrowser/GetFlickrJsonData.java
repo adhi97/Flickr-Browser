@@ -22,7 +22,7 @@ public class GetFlickrJsonData extends GetRawData {
     public GetFlickrJsonData(String searchCriteria, boolean matchAll) {
         super(null);
         createAndUpdateUri(searchCriteria,matchAll);
-        mPhotos = new ArrayList<Photo>();
+        mPhotos = new ArrayList<>();
     }
 
     public void execute() {
@@ -66,7 +66,7 @@ public class GetFlickrJsonData extends GetRawData {
         final String FLICKR_PHOTO_URL = "m";
         final String FLICKR_AUTHOR = "author";
         final String FLICKR_AUTHOR_ID = "author_id";
-        final String FLICKR_LINK = "link";
+//        final String FLICKR_LINK = "link";
         final String FLICKR_TAGS = "tags";
 
         try {
