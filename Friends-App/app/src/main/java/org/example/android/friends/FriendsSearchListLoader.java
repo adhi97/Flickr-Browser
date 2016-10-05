@@ -47,7 +47,11 @@ public class FriendsSearchListLoader extends AsyncTaskLoader<List<Friend>> {
                             mCursor.getColumnIndex(FriendsContract.FriendsColumns.FRIENDS_PHONE));
                     String email = mCursor.getString(
                             mCursor.getColumnIndex(FriendsContract.FriendsColumns.FRIENDS_EMAIL));
-                    Friend friend = new Friend(_id, name, phone, email);
+                    String facebook = mCursor.getString(
+                            mCursor.getColumnIndex(FriendsContract.FriendsColumns.FRIENDS_FACEBOOK));
+                    String github = mCursor.getString(
+                            mCursor.getColumnIndex(FriendsContract.FriendsColumns.FRIENDS_GITHUB));
+                    Friend friend = new Friend(_id, name, phone, email, facebook, github);
                     entries.add(friend);
                 } while(mCursor.moveToNext());
             }
