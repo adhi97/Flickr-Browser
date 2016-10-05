@@ -12,6 +12,8 @@ public class FriendsContract {
         String FRIENDS_NAME = "friends_name";
         String FRIENDS_EMAIL = "friends_email";
         String FRIENDS_PHONE = "friends_phone";
+        String FRIENDS_GITHUB = "friends_github";
+        String FRIENDS_FACEBOOK = "friends_facebook";
     }
 
     public static final String CONTENT_AUTHORITY = "org.example.android.friends.provider";

@@ -36,6 +36,20 @@
             android:layout_gravity="left"
             android:textColor="@color/friend_phone"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:textColor="@color/friend_email"
+            android:id="@+id/facebook1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:textColor="@color/friend_email"
+            android:id="@+id/github1"/>
+
     </LinearLayout>
 
     <LinearLayout

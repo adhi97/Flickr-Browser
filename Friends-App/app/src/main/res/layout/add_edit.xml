@@ -25,10 +25,24 @@
         android:hint="Phone number"
         android:inputType="phone"/>
 
+    <EditText
+        android:id="@+id/github"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="GitHub Link"
+        android:inputType="textUri"/>
+
+    <EditText
+        android:id="@+id/facebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Facebook"
+        android:inputType="text"/>
+
     <Button
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"/>
+        android:text="Save Contact"/>
 
 </LinearLayout>

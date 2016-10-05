@@ -40,10 +40,14 @@ public class FriendsCustomAdapter extends ArrayAdapter<Friend> {
         final String name = friend.getName();
         final String phone = friend.getPhone();
         final String email = friend.getEmail();
+        final String facebook = friend.getFacebook();
+        final String github = friend.getGithub();
 
         ((TextView) view.findViewById(R.id.friend_name)).setText(name);
         ((TextView) view.findViewById(R.id.friend_phone)).setText(phone);
         ((TextView) view.findViewById(R.id.friend_email)).setText(email);
+        ((TextView) view.findViewById(R.id.github)).setText(github);
+        ((TextView) view.findViewById(R.id.facebook)).setText(facebook);
 
         Button editButton = (Button) view.findViewById(R.id.edit);
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +58,8 @@ public class FriendsCustomAdapter extends ArrayAdapter<Friend> {
                 intent.putExtra(FriendsContract.FriendsColumns.FRIENDS_NAME, name);
                 intent.putExtra(FriendsContract.FriendsColumns.FRIENDS_PHONE, phone);
                 intent.putExtra(FriendsContract.FriendsColumns.FRIENDS_EMAIL, email);
+                intent.putExtra(FriendsContract.FriendsColumns.FRIENDS_FACEBOOK,facebook);
+                intent.putExtra(FriendsContract.FriendsColumns.FRIENDS_GITHUB, github);
                 getContext().startActivity(intent);
             }
         });
