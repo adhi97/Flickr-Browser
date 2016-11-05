@@ -1,125 +1,210 @@
-var turn = 'X';
-var score = {
-    'X': 0,
-    'O': 0
-};
-var gridValue = 0;
 
-function fnLoad() {
-    var select = document.getElementById("grid");
-    for (var i = 3; i <= 100; i += 1) {
-        var option = document.createElement('option');
-        select.options[select.options.length] = new Option(i + ' X ' + i, i);
-    }
+$(document).ready(function() {
 
-    addEvent(document.getElementById("game"), "click", fnChoose);
+    // Creating closure aka class kinda thingy to store all tic tac teo related stuff.
+    var Tictacteo = function() 
+    {
 
-    fnNewGame();
-}
+        // Multi Player or Single Player Game ?
+        this.GamePlayType = "vs-computer";
 
-function addEvent(element, eventName, callback) {
+        // Market symbols
+        this.HumanMarker = 'X';
+        this.ComputerMarker = 'O';
 
-    if (element.addEventListener) {
-        element.addEventListener(eventName, callback, false);
-    } else if (element.attachEvent) {
-        element.attachEvent("on" + eventName, callback);
-    }
-}
+        // Winning Patterns
+        this.WinPatterns = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]];
 
-function fnChoose(e) {
-    if (e.target && e.target.nodeName == "TD") {
-        var targetElement = document.getElementById(e.target.id);
-        var prevTurn;
-        if ((targetElement.className).indexOf("disabled") == -1) {
-            targetElement.innerHTML = turn;
-            targetElement.classList.add('disabled');
-            targetElement.classList.add(turn);
-            score[turn] += 1;
-            prevTurn = turn;
-            turn = turn === "X" ? "O" : "X";
-            if (fndecide(targetElement, prevTurn)) {
-                alert(prevTurn + ' has won the game');
-                fnNewGame();
-            } else if ((score['X'] + score['O']) == (gridValue * gridValue)) {
-                alert('Draw!');
-                fnNewGame();
+        // initial player human by default
+        this.CurrentPlayer = 'X';
+
+
+        /**
+        * This function sets game mode. i.e Multi player or single player
+        */
+        this.setGameMode = function(mode) {
+            this.GamePlayType = mode;
+        }
+
+
+        /**
+        * This function does automated move for computer player. 
+        * I am using math.random here to get any random unselected grid of the board
+        * and mark computers selection here. 
+        */
+        this.computerPlayerMove = function() {
+            var unselectedGrids = "";
+            unselectedGrids = $('#tictactoe-board td[class=]').map(function() {
+                      return $(this).attr("id");
+            }).get();
+
+            var randomGrid = unselectedGrids[Math.floor(Math.random() * unselectedGrids.length)];
+
+            $('#'+randomGrid).addClass("selectedBy"+this.CurrentPlayer);
+            $('#'+randomGrid).html(this.CurrentPlayer);
+            if(!game.checkWinner())
+            {
+                this.swapCurrentPlayer();
+            }
+
+        }
+
+        /**
+        * This function make a human player move. It takes cell aka grid element as paramter.
+        */
+        this.PlayerMove = function(cell) {
+
+            $(cell).addClass("selectedBy"+this.CurrentPlayer);
+            $(cell).html(this.CurrentPlayer);
+            if(!game.checkWinner())
+            {
+                this.swapCurrentPlayer();
+            }
+
+            if(this.GamePlayType == 'vs-computer' && this.CurrentPlayer == 'O'){
+                this.computerPlayerMove();
             }
         }
-    }
-}
 
-function fndecide(targetElement, prevTurn) {
-    var UL = document.getElementById('game');
-    var elements, i, j, cnt;
-    if (score[prevTurn] >= gridValue) {
-        var classes = targetElement.className.split(/\s+/);
-        for (var i = 0; i < classes.length; i += 1) {
-            cnt = 0;
-            if (classes[i].indexOf('row') !== -1 || classes[i].indexOf('col') !== -1 || classes[i].indexOf('dia') !== -1) {
-                elements = UL.getElementsByClassName(classes[i]);
-                for (var j = 0; j < elements.length; j += 1) {
-                    if (elements[j].innerHTML == prevTurn) {
-                        cnt += 1;
+        /**
+        * This function which is always initiated by user click. It check if cell is already been selected or not
+        * if not thn we let the player select that cell.
+        */
+        this.selectCell = function(cell) {
+            if($(cell).hasClass("selectedBy"+this.HumanMarker) || $(cell).hasClass("selectedBy"+this.ComputerMarker)) {
+                console.log("This grid has already been selected.");
+                $("#messageStack").text("This grid has already been selected. Please select another.");
+                return false;
+            }
+
+            this.PlayerMove(cell);
+            
+        }
+
+        /**
+        * This function change players turn from O to X or X to O.
+        */
+        this.swapCurrentPlayer = function() {
+            if(this.CurrentPlayer == this.HumanMarker) {
+                this.CurrentPlayer = this.ComputerMarker;
+            } else {
+                this.CurrentPlayer = this.HumanMarker;
+            }
+            $("#messageStack").text("It's player "+this.CurrentPlayer+"'s turn");
+        }
+
+        /**
+        * This function checks if we have any winner by selecting grids selected by both O and X. Those grids
+        * are thn matched with winning patterns we store in this.WinPatterns by function checkWinPatternMatch.
+        */
+        this.checkWinner = function() {
+            var selectedGrids = '';
+            var selectedByX = $("#tictactoe-board td.selectedByX");
+            var selectedByO = $("#tictactoe-board td.selectedByO");
+
+            if(this.CurrentPlayer == this.HumanMarker) {
+                
+                if(selectedByX.length >= 3) {
+                    selectedGrids = $('#tictactoe-board td.selectedByX').map(function() {
+                      return $(this).attr("id").substring(5);
+                    }).get();
+                    if(this.checkWinPatternMatch(selectedGrids)){
+                        return true;
                     }
                 }
-                if (cnt == gridValue) {
-                    return true;
+
+            } else {
+                
+                if(selectedByO.length >= 3) {
+                    selectedGrids = $('#tictactoe-board td.selectedByO').map(function() {
+                      return $(this).attr("id").substring(5);
+                    }).get();
+                    if(this.checkWinPatternMatch(selectedGrids)){
+                        return true;
+                    }
                 }
             }
-        }
-    }
-    return false;
-}
 
-function fnNewGame() {
-    var gameUL = document.getElementById("game");
-    if (gameUL.innerHTML !== '') {
-        gameUL.innerHTML = null;
-        score = {
-            'X': 0,
-            'O': 0
-        };
-        turn = 'X';
-        gridValue = 0;
-    }
-    var select = document.getElementById("grid");
-    gridValue = select.options[select.selectedIndex].value;
-    var i, j, li, k = 0,
-        classLists;
-    var gridAdd = +gridValue + 1;
 
-    for (var i = 1; i <= gridValue; i += 1) {
-        tr = document.createElement('tr');
-        for (var j = 1; j <= gridValue; j += 1) {
-            k += 1;
-            li = document.createElement('td');
-            li.setAttribute("id", 'li' + k);
-
-            classLists = 'td row' + i + ' col' + j;
-
-            if (i === j) {
-                classLists = 'td row' + i + ' col' + j + ' dia0';
+            if((selectedByO.length + selectedByX.length) === 9) {
+                alert("Its a draw!");
+                this.resetGame();
             }
 
-            if ((i + j) === gridAdd) {
-                classLists = 'td row' + i + ' col' + j + ' dia1';
-            }
-
-            if (!isEven(gridValue) && (Math.round(gridValue / 2) === i && Math.round(gridValue / 2) === j))
-                classLists = 'td row' + i + ' col' + j + ' dia0 dia1';
-
-            li.className = classLists;
-            tr.appendChild(li);
-
         }
-        gameUL.appendChild(tr);
+
+        /**
+        * This function compares selectedGrids with winning patterns stored in this class.
+        * If pattern is matched thn we prompt winner here.
+        */
+        this.checkWinPatternMatch = function(selectedGrids) {
+            winnerGridCount = 0;
+            var temp = this; 
+            $.each(this.WinPatterns, function(index, value) {
+                $.each(value, function(index, pattern) {
+                    if($.inArray(pattern.toString(), selectedGrids) > -1) {
+                        winnerGridCount++;
+                    }
+                });
+
+                if(winnerGridCount === 3) {
+                    alert("Player "+temp.CurrentPlayer+" won the game!");
+                    temp.resetGame();
+                    winnerGridCount = 0;
+                    return true;
+                }
+                winnerGridCount = 0;
+            });
+        }
+
+        /**
+        * This function resets the game board by making default player back to X and cleaning up the grids.
+        */
+        this.resetGame = function() {
+            this.CurrentPlayer = 'X';
+            this.cleanUpGrid();
+        }
+
+        /**
+        * This function just cleans up the grid by making all td's of table empty and remove all the classes.
+        */
+        this.cleanUpGrid = function() {
+            $("#tictactoe-board td").html('');
+            $("#tictactoe-board td").attr('class','');
+        }
+
+
     }
-}
 
 
-function isEven(value) {
-    if (value % 2 == 0)
-        return true;
-    else
-        return false;
-}
+
+    // Game (Tictactoe) class initiated here.
+    var game = new Tictacteo();
+
+
+    // Click event on single player button
+    $("#singlePlayer").click(function(e){
+        game.resetGame();
+        game.setGameMode("vs-computer");
+        $("#selectedGameMode").text("Selected Game Mode : Single Player");
+    });
+
+    // Click event on multi player button
+    $("#multiPlayer").click(function(e){
+        game.resetGame();
+        game.setGameMode("vs-human");
+        $("#selectedGameMode").text("Selected Game Mode : Multi Player");
+    });
+
+    // Click event on reset button
+    $("#resetGame").click(function(e){
+        game.resetGame();
+    });
+
+    // Click event for each cell or grid of the board.
+    $("#tictactoe-board td").click(function(e){
+        game.selectCell($(this));
+    });
+
+
+});
