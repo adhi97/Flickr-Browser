@@ -6,3 +6,4 @@
 5. __Deque:__ Implemented a dyanamic deque using an array in C++.
 6. __Linear Hashtable:__ Implemented a Hashtable using linear probing in C++. Improving the implementation now to use double hashing.
 7. __TicTacToe Webapp:__ Implemented a TicTacToe web application, which allows the user to play in single player, multiplayer or reset the game.
+8. __ARM Assembly Programs:__ Lab projects, which involve making subroutines, ISR's, and controlling I/O devices.
