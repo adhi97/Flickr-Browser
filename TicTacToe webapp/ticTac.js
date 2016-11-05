@@ -7,7 +7,7 @@ var gridValue = 0;
 
 function fnLoad() {
     var select = document.getElementById("grid");
-    for (i = 3; i <= 100; i += 1) {
+    for (var i = 3; i <= 100; i += 1) {
         var option = document.createElement('option');
         select.options[select.options.length] = new Option(i + ' X ' + i, i);
     }
@@ -53,11 +53,11 @@ function fndecide(targetElement, prevTurn) {
     var elements, i, j, cnt;
     if (score[prevTurn] >= gridValue) {
         var classes = targetElement.className.split(/\s+/);
-        for (i = 0; i < classes.length; i += 1) {
+        for (var i = 0; i < classes.length; i += 1) {
             cnt = 0;
             if (classes[i].indexOf('row') !== -1 || classes[i].indexOf('col') !== -1 || classes[i].indexOf('dia') !== -1) {
                 elements = UL.getElementsByClassName(classes[i]);
-                for (j = 0; j < elements.length; j += 1) {
+                for (var j = 0; j < elements.length; j += 1) {
                     if (elements[j].innerHTML == prevTurn) {
                         cnt += 1;
                     }
@@ -88,9 +88,9 @@ function fnNewGame() {
         classLists;
     var gridAdd = +gridValue + 1;
 
-    for (i = 1; i <= gridValue; i += 1) {
+    for (var i = 1; i <= gridValue; i += 1) {
         tr = document.createElement('tr');
-        for (j = 1; j <= gridValue; j += 1) {
+        for (var j = 1; j <= gridValue; j += 1) {
             k += 1;
             li = document.createElement('td');
             li.setAttribute("id", 'li' + k);
